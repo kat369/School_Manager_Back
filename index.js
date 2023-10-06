@@ -3,6 +3,7 @@ const db = require("./db/connect");
 const app = express();
 const loginRoutes = require("./routes/login");
 const registerRoutes = require("./routes/register");
+const createRoutes = require("./routes/createTask");
 require("dotenv").config();
 db();
 app.use(express.json());
@@ -16,6 +17,7 @@ app.get("/", (request, response) => {
 
 app.use("/register", registerRoutes);
 app.use("/login", loginRoutes);
+app.use("/", createRoutes);
 
 app.listen(PORT, () => {
     console.log(`The app is running in the port ${PORT}`);
