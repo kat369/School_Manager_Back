@@ -1,24 +1,44 @@
-const express = require("express");
-const db = require("./db/connect");
-const app = express();
-const loginRoutes = require("./routes/login");
-const registerRoutes = require("./routes/register");
-const createRoutes = require("./routes/createTask");
-require("dotenv").config();
-db();
-app.use(express.json());
-const cors = require("cors");
-app.use(cors("*"));
 
-const PORT = process.env.PORT;
-app.get("/", (request, response) => {
-  response.send("Welcome to Task Management Application");
+import express from "express";
+import { MongoClient } from "mongodb";
+import adminRouter from "./routes/login.js"
+import * as dotenv from 'dotenv';
+import cors from "cors";
+dotenv.config()
+
+const app = express();
+app.use(cors())
+const PORT =process.env.PORT
+
+   
+const client=new MongoClient(process.env.MONGO_URL) 
+
+ await client.connect(); 
+ console.log("Mongodb is connected");
+
+
+ app.use(express.json());
+
+app.get("/", function (request, response) {
+  response.send("welcome to movie app backend");
 });
 
-app.use("/register", registerRoutes);
-app.use("/login", loginRoutes);
-app.use("/", createRoutes);
+app.use('/',adminRouter);
 
-app.listen(PORT, () => {
-    console.log(`The app is running in the port ${PORT}`);
-  });
+
+app.listen(PORT, () => console.log(`The server started in: ${PORT} ✨✨`));
+
+
+export {client};
+
+
+
+
+
+
+
+
+
+
+
+
