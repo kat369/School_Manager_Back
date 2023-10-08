@@ -20,7 +20,7 @@ const client=new MongoClient(process.env.MONGO_URL)
  app.use(express.json());
 
 app.get("/", function (request, response) {
-  response.send("welcome to movie app backend");
+  response.send("welcome to Task Management app backend");
 });
 
 app.use('/',adminRouter);
