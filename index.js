@@ -20,7 +20,7 @@ const client=new MongoClient("mongodb+srv://kat369:Kathiravan1995@project-m-tool
  app.use(express.json());
 
 app.get("/", function (request, response) {
-  response.send("welcome to Task Management app backend");
+  response.send("welcome to School Management app backend");
 });
 
 app.use('/',adminRouter);
